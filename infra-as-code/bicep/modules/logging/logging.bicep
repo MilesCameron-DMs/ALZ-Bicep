@@ -52,9 +52,6 @@ param parLogAnalyticsWorkspaceSolutions array = [
   'VMInsights'
 ]
 
-@sys.description('Log Analytics Workspace should be linked with the automation account.')
-param parLogAnalyticsWorkspaceLinkAutomationAccount bool = true
-
 @sys.description('Automation account name.')
 param parAutomationAccountName string = 'alz-automation-account'
 
@@ -79,7 +76,7 @@ param parTelemetryOptOut bool = false
 // Customer Usage Attribution Id
 var varCuaid = 'f8087c67-cc41-46b2-994d-66e4b661860d'
 
-resource resAutomationAccount 'Microsoft.Automation/automationAccounts@2022-08-08' = {
+resource resAutomationAccount 'Microsoft.Automation/automationAccounts@2021-06-22' = {
   name: parAutomationAccountName
   location: parAutomationAccountLocation
   tags: parAutomationAccountTags
@@ -96,7 +93,7 @@ resource resAutomationAccount 'Microsoft.Automation/automationAccounts@2022-08-0
   }
 }
 
-resource resLogAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+resource resLogAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
   name: parLogAnalyticsWorkspaceName
   location: parLogAnalyticsWorkspaceLocation
   tags: parLogAnalyticsWorkspaceTags
@@ -123,9 +120,8 @@ resource resLogAnalyticsWorkspaceSolutions 'Microsoft.OperationsManagement/solut
   }
 }]
 
-resource resLogAnalyticsLinkedServiceForAutomationAccount 'Microsoft.OperationalInsights/workspaces/linkedServices@2020-08-01' = if (parLogAnalyticsWorkspaceLinkAutomationAccount) {
-  parent: resLogAnalyticsWorkspace
-  name: 'Automation'
+resource resLogAnalyticsLinkedServiceForAutomationAccount 'Microsoft.OperationalInsights/workspaces/linkedServices@2020-08-01' = {
+  name: '${resLogAnalyticsWorkspace.name}/Automation'
   properties: {
     resourceId: resAutomationAccount.id
   }

@@ -9,10 +9,7 @@ param (
   [String]$TemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\hubNetworking\hubNetworking.bicep",
 
   [Parameter()]
-  [String]$TemplateParameterFile = "config\custom-parameters\hubNetworking.parameters.all.json",
-
-  [Parameter()]
-  [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
+  [String]$TemplateParameterFile = "config\custom-parameters\hubNetworking.parameters.all.json"
 )
 
 # Parameters necessary for deployment
@@ -21,7 +18,6 @@ $inputObject = @{
   ResourceGroupName     = $ConnectivityResourceGroup
   TemplateFile          = $TemplateFile
   TemplateParameterFile = $TemplateParameterFile
-  WhatIf                = $WhatIfEnabled
   Verbose               = $true
 }
 

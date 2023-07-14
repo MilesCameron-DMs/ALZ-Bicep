@@ -28,9 +28,6 @@
         "VMInsights"
       ]
     },
-    "parLogAnalyticsWorkspaceLinkAutomationAccount": {
-      "value": true
-    },
     "parAutomationAccountName": {
       "value": "alz-automation-account"
     },

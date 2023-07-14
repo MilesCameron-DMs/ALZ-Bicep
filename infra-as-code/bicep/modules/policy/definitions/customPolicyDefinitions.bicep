@@ -86,22 +86,6 @@ var varCustomPolicyDefinitionsArray = [
     libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-Databricks-VirtualNetwork.json')
   }
   {
-    name: 'Deny-FileServices-InsecureAuth'
-    libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-FileServices-InsecureAuth.json')
-  }
-  {
-    name: 'Deny-FileServices-InsecureKerberos'
-    libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-FileServices-InsecureKerberos.json')
-  }
-  {
-    name: 'Deny-FileServices-InsecureSmbChannel'
-    libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-FileServices-InsecureSmbChannel.json')
-  }
-  {
-    name: 'Deny-FileServices-InsecureSmbVersions'
-    libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-FileServices-InsecureSmbVersions.json')
-  }
-  {
     name: 'Deny-MachineLearning-Aks'
     libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-MachineLearning-Aks.json')
   }
@@ -178,28 +162,12 @@ var varCustomPolicyDefinitionsArray = [
     libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-Storage-minTLS.json')
   }
   {
-    name: 'Deny-Storage-SFTP'
-    libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-Storage-SFTP.json')
-  }
-  {
-    name: 'Deny-StorageAccount-CustomDomain'
-    libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-StorageAccount-CustomDomain.json')
-  }
-  {
     name: 'Deny-Subnet-Without-Nsg'
     libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-Subnet-Without-Nsg.json')
   }
   {
-    name: 'Deny-Subnet-Without-Penp'
-    libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-Subnet-Without-Penp.json')
-  }
-  {
     name: 'Deny-Subnet-Without-Udr'
     libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-Subnet-Without-Udr.json')
-  }
-  {
-    name: 'Deny-UDR-With-Specific-NextHop'
-    libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deny-UDR-With-Specific-NextHop.json')
   }
   {
     name: 'Deny-VNET-Peer-Cross-Sub'
@@ -478,10 +446,6 @@ var varCustomPolicyDefinitionsArray = [
     libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deploy-Sql-Tde.json')
   }
   {
-    name: 'Deploy-Sql-vulnerabilityAssessments_20230706'
-    libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deploy-Sql-vulnerabilityAssessments_20230706.json')
-  }
-  {
     name: 'Deploy-Sql-vulnerabilityAssessments'
     libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deploy-Sql-vulnerabilityAssessments.json')
   }
@@ -505,6 +469,7 @@ var varCustomPolicyDefinitionsArray = [
     name: 'Deploy-Windows-DomainJoin'
     libDefinition: loadJsonContent('lib/policy_definitions/policy_definition_es_Deploy-Windows-DomainJoin.json')
   }
+
 ]
 
 // This variable contains a number of objects that load in the custom Azure Policy Set/Initiative Defintions that are provided as part of the ESLZ/ALZ reference implementation - this is automatically created in the file 'infra-as-code\bicep\modules\policy\lib\policy_set_definitions\_policySetDefinitionsBicepInput.txt' via a GitHub action, that runs on a daily schedule, and is then manually copied into this variable.
@@ -617,13 +582,13 @@ var varCustomPolicySetDefinitionsArray = [
       }
       {
         definitionReferenceId: 'MariaDbDenyPublicIP'
-        definitionId: '/providers/Microsoft.Authorization/policyDefinitions/fdccbe47-f3e3-4213-ad5d-ea459b2fa077'
+        definitionId: '${varTargetManagementGroupResourceId}/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-MariaDB'
         definitionParameters: varPolicySetDefinitionEsDenyPublicPaaSEndpointsParameters.MariaDbDenyPublicIP.parameters
         definitionGroups: []
       }
       {
         definitionReferenceId: 'MlDenyPublicIP'
-        definitionId: '/providers/Microsoft.Authorization/policyDefinitions/438c38d2-3772-465a-a9cc-7a6666a275ce'
+        definitionId: '${varTargetManagementGroupResourceId}/providers/Microsoft.Authorization/policyDefinitions/Deny-MachineLearning-PublicNetworkAccess'
         definitionParameters: varPolicySetDefinitionEsDenyPublicPaaSEndpointsParameters.MlDenyPublicIP.parameters
         definitionGroups: []
       }
